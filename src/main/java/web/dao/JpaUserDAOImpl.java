@@ -15,7 +15,6 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
-//@Transactional
 public class JpaUserDAOImpl implements JpaUserDAO {
 
     @PersistenceContext

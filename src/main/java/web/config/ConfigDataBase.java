@@ -36,12 +36,6 @@ public class ConfigDataBase {
         this.environment = environment;
     }
 
-//    @Bean
-//    public EntityManager getEntityManager(){
-//        EntityManagerFactory emf = Persistence.createEntityManagerFactory("web.models");
-//        EntityManager em = emf.createEntityManager();
-//        return em;
-//    }
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean(){
