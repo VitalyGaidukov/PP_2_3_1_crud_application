@@ -41,4 +41,9 @@ public class UserServiceImpl implements UserService{
     public void deleteUser(int id) {
         jpaUserDAO.deleteUser(id);
     }
+
+    @Override
+    public void updateUser(User user) {
+        jpaUserDAO.updateUser(user);
+    }
 }

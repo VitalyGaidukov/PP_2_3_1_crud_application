@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
-import org.springframework.stereotype.Service;
+
 import org.springframework.transaction.annotation.Transactional;
 import web.models.User;
 
@@ -15,13 +15,11 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
-@Transactional
+//@Transactional
 public class JpaUserDAOImpl implements JpaUserDAO {
-
 
     @PersistenceContext
     private EntityManager entityManager;
-
 
     @Override
     public List<User> getAllUsers() {
@@ -46,5 +44,11 @@ public class JpaUserDAOImpl implements JpaUserDAO {
     @Override
     public void deleteUser(int id) {
         entityManager.remove(getUser(id));
+    }
+
+    @Transactional
+    @Override
+    public void updateUser(User user) {
+        entityManager.merge(user);
     }
 }

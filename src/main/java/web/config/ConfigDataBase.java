@@ -36,12 +36,12 @@ public class ConfigDataBase {
         this.environment = environment;
     }
 
-    @Bean
-    public EntityManager getEntityManager(){
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("web.models");
-        EntityManager em = emf.createEntityManager();
-        return em;
-    }
+//    @Bean
+//    public EntityManager getEntityManager(){
+//        EntityManagerFactory emf = Persistence.createEntityManagerFactory("web.models");
+//        EntityManager em = emf.createEntityManager();
+//        return em;
+//    }
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean(){
@@ -74,7 +74,7 @@ public class ConfigDataBase {
     private Properties getHibernateProperties(){
         Properties properties = new Properties();
         properties.put("hibernate.show_sql",environment.getProperty("hibernate.show_sql"));
-        properties.put("hibernate.hbm2ddl.auto", environment.getProperty("hibernate.hbm2ddl.auto"));
+        //properties.put("hibernate.hbm2ddl.auto", environment.getProperty("hibernate.hbm2ddl.auto"));
         properties.put("hibernate.dialect", environment.getProperty("hibernate.dialect"));
         return properties;
     }

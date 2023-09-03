@@ -1,11 +1,29 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <title>Users List</title>
+    <style>
+        TABLE {
+            border-collapse: collapse; /* Убираем двойные линии между ячейками */
+            width: 900px; /* Ширина таблицы */
+        }
+        TH {
+            background: #00fff7; /* Цвет фона ячейки */
+            text-align: left; /* Выравнивание по левому краю */
+        }
+        TD {
+            background: #571e1e; /* Цвет фона ячеек */
+            text-align: center; /* Выравнивание по центру */
+        }
+        TH, TD {
+            border: 1px solid rgba(0, 0, 0, 0.99); /* Параметры рамки */
+            padding: 4px; /* Поля вокруг текста */
+        }
+    </style>
 </head>
 <body>
 <h3>Users List</h3>
@@ -17,15 +35,28 @@
         <th>Surname</th>
         <th>PhoneNumber</th>
         <th>Email</th>
+        <th>Operations</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="user:${allUsers}">
         <td th:text="${user.getName()}"/>
-        <td th:text="${user.getSurname()()}"/>
+        <td th:text="${user.getSurname()}"/>
         <td th:text="${user.getPhoneNumber()}"/>
         <td th:text="${user.getEmail()}"/>
+        <td>
+            <form th:method="GET" th:action="@{/{id}/get(id=${user.getId()})}" th:object="${user}">
+                <input type="submit" value="Update">
+            </form>
+        <td>
+            <form th:method="DELETE" th:action="@{/{id}(id=${user.getId()})}">
+                <input type="submit" value="Delete"/>
+            </form>
+
+        </td>
     </tr>
     </tbody>
 </table>
+<br>
+<input type="button" value="Add" onclick="window.location.href = 'addNewUser'"/>
 </body>
