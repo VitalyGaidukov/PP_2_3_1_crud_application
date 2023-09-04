@@ -22,8 +22,7 @@ public class JpaUserDAOImpl implements JpaUserDAO {
 
     @Override
     public List<User> getAllUsers() {
-
-        return entityManager.createQuery("select u from User u", User.class).getResultList();
+        return entityManager.createQuery("from User", User.class).getResultList();
     }
 
     @Override
@@ -34,15 +33,14 @@ public class JpaUserDAOImpl implements JpaUserDAO {
 
     @Override
     public User getUser(int id) {
-        TypedQuery<User> query = entityManager.createQuery("select u from User u where u.id = :id", User.class);
-        query.setParameter("id", id);
-        return query.getResultList().stream().findAny().orElse(null);
+        return entityManager.find(User.class, id);
     }
 
     @Transactional
     @Override
     public void deleteUser(int id) {
-        entityManager.remove(getUser(id));
+        User user = entityManager.find(User.class, id);
+        entityManager.remove(user);
     }
 
     @Transactional
