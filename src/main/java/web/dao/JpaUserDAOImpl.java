@@ -10,9 +10,11 @@ import web.models.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import java.util.List;
+
 
 @Repository
 public class JpaUserDAOImpl implements JpaUserDAO {
@@ -39,8 +41,9 @@ public class JpaUserDAOImpl implements JpaUserDAO {
     @Transactional
     @Override
     public void deleteUser(int id) {
-        User user = entityManager.find(User.class, id);
-        entityManager.remove(user);
+        Query queue = entityManager.createQuery("delete from User u where u.id =:id");
+        queue.setParameter("id", id);
+        queue.executeUpdate();
     }
 
     @Transactional
